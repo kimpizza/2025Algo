@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int testCase = sc.nextInt(); // 테스트 케이스
+        
+        for (int i = 0; i < testCase; i++) {
+            String s = sc.next(); // 입력 문자열
+            if (s.length() >= 2 && s.length() <= 50) {
+                System.out.println(solve(s)); // solve 호출
+            } else {
+                System.out.println("NO"); // 조건에 맞지 않는 경우 NO 출력
+            }
+        }
+    }
+    
+    public static String solve(String s) {
+        Stack<Character> stack = new Stack<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            
+            if (c == '(') {
+                stack.push(c);
+            } else if (stack.isEmpty()) { // 스택이 비었을 경우
+                return "NO";
+            } else {
+                stack.pop();
+            }
+        }
+        
+        return stack.isEmpty() ? "YES" : "NO"; // 스택이 비었으면 YES, 아니면 NO
+    }
+}
