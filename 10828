@@ -1,1 +1,38 @@
- 
+import java.io.*;
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int n = Integer.parseInt(reader.readLine()); // 명령의 수
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int i = 0; i < n; i++) {
+            String command = reader.readLine();
+            
+            if (command.startsWith("push")) {
+                // push X 명령 처리
+                int value = Integer.parseInt(command.split(" ")[1]);
+                stack.push(value);
+            } else if (command.equals("pop")) {
+                // pop 명령 처리
+                writer.write(stack.isEmpty() ? "-1\n" : stack.pop() + "\n");
+            } else if (command.equals("size")) {
+                // size 명령 처리
+                writer.write(stack.size() + "\n");
+            } else if (command.equals("empty")) {
+                // empty 명령 처리
+                writer.write(stack.isEmpty() ? "1\n" : "0\n");
+            } else if (command.equals("top")) {
+                // top 명령 처리
+                writer.write(stack.isEmpty() ? "-1\n" : stack.peek() + "\n");
+            }
+        }
+        
+        writer.flush();
+        writer.close();
+        reader.close();
+    }
+}
